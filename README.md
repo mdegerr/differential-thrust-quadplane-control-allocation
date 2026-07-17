@@ -1,6 +1,6 @@
 ﻿# Feasibility-Aware Acceleration Control for a Differential-Thrust Quad-Plane
 
-This repository contains a sanitized technical presentation on acceleration control for a differential-thrust quad-plane UAV.
+This repository contains a technical presentation on acceleration control for a differential-thrust quad-plane UAV.
 
 The presentation focuses on how a quad-plane with fixed rotors and no conventional control surfaces can track acceleration commands across hover, transition, and cruise while respecting actuator limits.
 
@@ -31,7 +31,3 @@ docs/quadplane_control_allocation_study.pdf
 The key idea is that acceleration control for this platform is not only a tracking problem. It is also an actuator-feasibility problem.
 
 When the requested force and moment vector is outside the rotor limits, simple rotor clipping can unintentionally distort roll, pitch, or yaw response. A feasibility-aware allocator instead searches for the best achievable force and moment response while keeping all rotor commands within physical limits.
-
-## Notes
-
-This is a public portfolio version of the work. It does not include company-specific documents, original case-study material, or proprietary platform data.
