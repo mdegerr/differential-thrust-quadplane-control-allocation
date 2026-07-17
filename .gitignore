@@ -1,0 +1,27 @@
+﻿# MATLAB
+*.asv
+*.fig
+*.mat
+*.mlx
+slprj/
+codegen/
+
+# OS/editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Keep private case/interview material out of the public repo
+*Case Study*
+*case study*
+*Speaking_Script*
+*speaking_script*
+*interview*
+*confidential*
+*private*
+*company*
+*.pptx
+*.docx
+
+
