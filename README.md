@@ -1,72 +1,37 @@
 ﻿# Feasibility-Aware Acceleration Control for a Differential-Thrust Quad-Plane
 
-This repository presents a conceptual control architecture and reduced-order MATLAB proof-of-concept for a fixed-wing quad-plane configuration with four fixed rotors and no conventional control surfaces.
+This repository contains a sanitized technical presentation on acceleration control for a differential-thrust quad-plane UAV.
 
-The main focus is actuator-feasible acceleration control: converting commanded acceleration objectives into rotor thrust commands while respecting physical rotor limits and preserving attitude/moment authority as much as possible.
+The presentation focuses on how a quad-plane with fixed rotors and no conventional control surfaces can track acceleration commands across hover, transition, and cruise while respecting actuator limits.
 
-## Project Scope
+## Presentation
 
-- Regime-spanning acceleration control concept for hover, transition, and cruise
-- Differential-thrust force and moment generation
-- Smooth lift-sharing between rotor-dominant and wing-dominant regimes
-- Constrained control allocation under rotor saturation
-- MATLAB-generated figures for allocation and feasibility explanation
-
-This is a public, sanitized portfolio version. It does not include any company-specific case documents, proprietary platform data, or interview material.
-
-## Core Idea
-
-For a differential-thrust quad-plane, the same four rotors must generate both total force and body moments. When a commanded force/moment vector is infeasible, independent rotor clipping can unintentionally distort roll, pitch, or yaw moments.
-
-Instead, the allocator can be written as a constrained optimization problem:
-
-```text
-T* = arg min ||Wu (B T - u_cmd)||^2 + rho ||T - T_trim||^2
-subject to 0 <= Ti <= Tmax
-```
-
-where:
-
-- `T` is the rotor thrust vector
-- `B` is the mixing/control-effectiveness matrix
-- `u_cmd` is the commanded force/moment vector
-- `Wu` defines axis priorities under saturation
-- `rho` regularizes the solution around trim thrust
-
-## Repository Structure
-
-```text
-.
-|-- README.md
-|-- REFERENCES.md
-|-- SANITIZATION_CHECKLIST.md
-|-- scripts/
-|   `-- generate_constrained_allocation_equation.m
-`-- assets/
-    `-- constrained_allocation_equation.png
-```
-
-## MATLAB Figure Generation
-
-Run the MATLAB script from the repository root:
-
-```matlab
-run('scripts/generate_constrained_allocation_equation.m')
-```
-
-It generates the constrained allocation equation figure used in the technical presentation.
-
-## Suggested Presentation File
-
-After you sanitize the presentation, add it with a generic filename, for example:
+The presentation PDF is available here:
 
 ```text
 docs/quadplane_control_allocation_study.pdf
 ```
 
-Do not upload the original case-study PDF or any company-specific document.
+## What The Presentation Covers
+
+- Problem definition for a differential-thrust quad-plane
+- Hover vs. cruise force and moment generation
+- Static pitch stability considerations
+- Differential-thrust authority limits with airspeed
+- Cascaded acceleration, attitude, and rate control architecture
+- INDI-based acceleration feedback concept
+- Continuous blending through transition
+- Control allocation under actuator saturation
+- Saturation priority and graceful degradation
+- MATLAB reduced-order proof-of-concept results
+- Implementation path from simulation to flight testing
+
+## Main Technical Idea
+
+The key idea is that acceleration control for this platform is not only a tracking problem. It is also an actuator-feasibility problem.
+
+When the requested force and moment vector is outside the rotor limits, simple rotor clipping can unintentionally distort roll, pitch, or yaw response. A feasibility-aware allocator instead searches for the best achievable force and moment response while keeping all rotor commands within physical limits.
 
 ## Notes
 
-This repository is intended as a technical portfolio project, not as a complete aircraft controller implementation. The MATLAB material is a reduced-order proof-of-concept focused on allocation logic and saturation behavior.
-
+This is a public portfolio version of the work. It does not include company-specific documents, original case-study material, or proprietary platform data.
